@@ -45,7 +45,10 @@ else:
 
 ############################################################
 
-#Classesclass Admin:
+#Classes
+
+
+class Admin:
 
     def __init__(self, id, full_name, age, id_no):
         self.id = id
@@ -142,7 +145,7 @@ class Librarian(Admin):
                     librarian.id \n librarian.full_name \n librarian.age\n librarian.id_no \n librarian.emplyment_type")
         else:
             print("No librarians ")
-
+############################################################################################################
 
 class Client(Admin):
 
@@ -225,7 +228,17 @@ class Client(Admin):
                 print ("client.id \n client.full_name\n client.age\n client.id_no\n client.phone_number")
         else:
             print("No clients ")
+########################################################################################
 
+   #def displayAvailablebooks(self):
+     #print("The books we have in our library are as follows:")
+     #print("================================")
+   # for book in self.availablebooks:
+        #print(book)
+
+
+
+#######################################################################################
 
 class Book:
 
