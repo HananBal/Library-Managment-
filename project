@@ -1,1 +1,514 @@
+#مشروع المكتبة
+
+#def get_input_from_user(act: Activity):
+    name = input("Enter client name: ")
+    age = input("Enter client age: ")
+    id_no = input("Enter client id_no: ")
+    phone = input("Enter client phone: ")
+
+    if Methods_check.check_value_is_empty(name, age, id_no, phone):
+        print("Invaild inputs")
+        return
+##################################################################
+
+
+
+
+import datetime
+from all import*
+
+choice = input(" Welcome to our Library (Book Store)" )
+                       "1. Clients Menu\n"
+                       "2. Librarian Menu\n"
+                       "3. Books Menu\n"
+                       "4. Borrowing Orders Menu\n"
+                       "5. Exit the System\n"
+                       "Your choice: ")
+
+if choice == "1":
+            Client.Clients_fun()
+
+
+if choice == "2":
+            Librarian.Librarians_fun()
+
+
+elif choice == "3":
+            Book.Books_fun()
+
+
+elif choice == "4":
+            Borrowing_Order.Orders_fun()
+
+else:
+            exit()
+
+############################################################
+
+#Classesclass Admin:
+
+    def __init__(self, id, full_name, age, id_no):
+        self.id = id
+        self.full_name = full_name
+        self.age = age
+        self.id_no = id_no
+
+
+class Librarian(Admin):
+
+    def __init__(self, id, full_name, age, id_no, emplyment_type):
+        super().__init__(id, full_name, age, id_no)
+        self.emplyment_type = emplyment_type
+
+    librarian_List = []
+
+    def Librarians_fun():
+
+        isBack = False
+        while (not isBack):
+
+            choice = input(" Librarians \n"
+                           "1.  New librarian\n"
+                           "2.  all librarians\n"
+                           "4. Back main page \n"
+                           "Your choice: ")
+
+            if choice == "1":
+                Librarian.Add_Librarian()
+
+
+
+            elif choice == "2":
+                Librarian.List_Librarians()
+
+            elif choice == "3":
+                isBack = True
+
+            else:
+                print("\nInvalid input!")
+
+    def Search_Librarian(id):
+
+        for librarian in Librarian.librarian_List:
+            if librarian.id == id:
+                return librarian.librarian_List.index(librarian)
+        return -1
+
+    def Add_Librarian():
+
+        id = input("\nEnter librarian id: ")
+        if id.strip() != '' and id.isdigit() and Librarian.Search_Librarian(id) == -1:
+            full_name = input("Enter  full name: ")
+            if full_name.strip() != '' and full_name.replace(' ', '').isalpha():
+                age = input("Enter  age: ")
+                if age.strip() != '' and age.isdigit():
+                    id_no = input("Enter  id number: ")
+                    if id_no.strip() != '' and id_no.isdigit():
+                        emplyment_type = input("Enter librarian emplyment type (Enter 1 or 2):\n"
+                                               "1. Full time\n"
+                                               "2. Part time\n"
+                                               "Emplyment type: ")
+                        if emplyment_type == "1":
+                            emplyment_type = "Full"
+
+                            newlibrarian = Librarian(id, full_name, age, id_no, emplyment_type)
+                            Librarian.librarian_List.append(newlibrarian)
+                            print(" added successfully\n")
+
+                        elif emplyment_type == "2":
+                            emplyment_type = "Part"
+
+                            new_librarian = Librarian(id, full_name, age, id_no, emplyment_type)
+                            Librarian.librarian_List.append(new_librarian)
+                            print(" added successfully\n")
+
+                        else:
+                            print("Invalid input!")
+                    else:
+                        print("Invalid input!")
+                else:
+                    print("Invalid input!")
+            else:
+                print("Invalid input!")
+        else:
+            print("Invalid input!")
+
+    def List_Librarians():
+
+        if len(Librarian.librarianList) > 0:
+            print(Librarian id\n Librarian name\n Librarian age\n Librarian.id \n Librarian emplyment_type")
+            for librarian in Librarian.librarian_List:
+                print(
+                    librarian.id \n librarian.full_name \n librarian.age\n librarian.id_no \n librarian.emplyment_type")
+        else:
+            print("No librarians ")
+
+
+class Client(Admin):
+
+    def __init__(self, id, full_name, age, id_no, phone_number):
+        super().__init__(id, full_name, age, id_no)
+        self.phone_number = phone_number
+
+
+    client_List = []
+
+
+    def Clients_fun():
+
+        isReturn = False
+        while (not isReturn):
+
+            choice = input("\nClients \n"
+                           "1.  New client\n"
+                           "2.  All clients\n"
+                           "3. Back to main page\n"
+                           "Your choice: ")
+
+            if choice == "1":
+                Client.Add_Client()
+
+
+
+            elif choice == "2":
+                Client.List_Clients()
+
+            elif choice == "3":
+                isBack = True
+
+            else:
+                print("Invalid input!")
+
+
+    def Search_Client(id):
+
+        for client in Client.client_List:
+            if client.id == id:
+                return Client.client_List.index(client)
+        return -1
+
+
+  def Add_Client():
+
+     id = input("\nEnter client id: ")
+        if id.strip() != '' and id.isdigit() and Client.Search_Client(id) == -1:
+            full_name = input("Enter client full name: ")
+            if full_name.strip() != '' and full_name.replace(' ', '').isalpha():
+                age = input("Enter client age: ")
+                if age.strip() != '' and age.isdigit():
+                    id_no = input("Enter client id number: ")
+                    if id_no.strip()!= '' and id_no.isdigit():
+                        phone_number = input("Enter client phone number: ")
+                        if phone_number.strip() != '' and phone_number.isdigit():
+
+                            new_Client = Client(id, full_name, age, id_no, phone_number)
+                            Client.client_List.append(new_Client)
+                            print(" added successfully")
+
+                        else:
+                            print("Invalid input!")
+                    else:
+                        print("Invalid input!")
+                else:
+                    print("Invalid input!")
+            else:
+                print("Invalid input!")
+        else:
+            print("Invalid input!")
+
+
+    def List_Clients():
+
+        if len(Client.client_List) > 0:
+            print("Client id\n Client name\n Client age\n Client ID\n Client phone")
+            for client in Client.client_List:
+                print ("client.id \n client.full_name\n client.age\n client.id_no\n client.phone_number")
+        else:
+            print("No clients ")
+
+
+class Book:
+
+    def __init__(self, id, title, description, author, status):
+        self.id = id
+        self.title = title
+        self.description = description
+        self.author = author
+        self.status = status
+
+    bookList = []
+
+    def Books_fun():
+
+        isBack = False
+        while (not isBack):
+
+            choice = input("\n Books \n"
+                           "1. Add new book\n"
+
+                           "2. All books\n"
+                           "3. Total available books\n"
+                           "4. Total borrowed books\n"
+                           "5. Back to main page\n"
+                           "Your choice: ")
+
+            if choice == "1":
+                Book.Add_Book()
+
+            elif choice == "2":
+                Book.List_Books()
+
+            elif choice == "3":
+                Book.Total_Available()
+
+            elif choice == "4":
+                Book.Total_Borrowed()
+
+            elif choice == "5":
+                isBack = True
+
+            else:
+                print("\nInvalid input!")
+
+    def Search_Book(id):
+
+        for book in Book.book_List:
+            if book.id == id:
+                return book.book_List.index(book)
+        return -1
+
+    def Active_Books():
+
+        print("\nActive Books:")
+        print("\nBook id\n Book title\n Book description\n Book author\n Book status")
+        for book in Book.book_List:
+            if book.status == "Active":
+                print("book.id\n book.title\n book.description \n book.author \n book.status")
+
+    def Add_Book():
+
+        id = input("\nEnter book id: ")
+        if id.strip() != '' and id.isdigit() and Book.Search_Book(id) == -1:
+            title = input("Enter book title: ")
+            if title.strip() != '':
+                description = input("Enter book description: ")
+                if description.strip() != '':
+                    author = input("Enter book author: ")
+                    if author.strip() != '' and author.replace(' ', '').isalpha():
+                        status = "Active"
+
+                        new_Book = Book(id, title, description, author, status)
+                        Book.book_List.append(new_Book)
+                        print(" Book added successfully")
+
+                    else:
+                        print("Invalid input!")
+                else:
+                    print("Invalid input!")
+            else:
+                print("Invalid input!")
+        else:
+            print("Invalid input!")
+
+    def List_Books():
+
+     if len(Book.book_List) > 0:
+      print("\nBook id\n Book title\n Book description\n Book author\n Book status")
+        for book in Book.bookList:
+         print("book.id \n book.title \n book.description \n book.author" \n "book.status")
+     else:
+          print(" NO books ")
+
+    def Total_Available():
+
+        active = 0
+        for book in Book.book_List:
+            if book.status == "Active":
+                active = active + 1
+        print("Total available book = ", active)
+
+    def Total_Borrowed():
+
+        inactive = 0
+        for book in Book.book_List:
+            if book.status == "Inactive":
+                inactive = inactive + 1
+        print(" Total borrowed book = ", inactive)
+
+
+class Borrowing_Order:
+
+   def __init__(self, id, date, client_id, book_id, librarian_id, status):
+        self.id = id
+        self.date = date
+        self.client_id = client_id
+        self.book_id = book_id
+        self.librarian_id = librarian_id
+        self.status = status
+
+  orders_List = []
+
+ counter = 0
+
+  def Orders_fun():
+
+    isBack = False
+     while (not isBack):
+       choice = input("\n\t Borrowing Orders Menu:\n"
+                           "1. Borrow a book\n"
+                           "2. Return a book\n"
+                           "3. Cancel order\n"
+                           "4.  client orders\n"
+                           "5.  All orders\n"
+                           "6. Total borrowed orders\n"
+                           "7. main page\n"
+                           "Your choice: ")
+
+            if choice == "1":
+                Borrowing_Order.Borrow_Book()
+
+            elif choice == "2":
+                Borrowing_Order.Return_Book()
+
+            elif choice == "3":
+                BorrowingOrder.Cancel_Order()
+
+
+            elif choice == "4":
+                Borrowing_Order.Client_Orders()
+
+            elif choice == "5":
+                Borrowing_Order.List_Orders()
+
+            elif choice == "6":
+                Borrowing_Order.Total_Orders()
+
+            elif choice == "7":
+                isBack = True
+
+            else:
+                print("\nInvalid input!")
+
+def Search_Order(id):
+
+        for order in Borrowing_Order.orders_List:
+            if order.id == id:
+                return Borrowing_Order.orders_List.index(order)
+        return -1
+
+ def ActiveOrders():
+
+        print("\nActive orders: ")
+        print("\nBorrowing id\t  Order date\t Client id\t Book id\t Librarian id\t Status")
+        for order in Borrowing_Order.orders_List:
+            if order.status == "Active":
+                print(order.id, "\t", order.date, "\t", order.client_id, "\t", order.book_id,
+                      "\t", order.librarian_id, "\t", order.status)
+
+ def Borrow_Book():
+
+        librarian_id = input("\nEnter your librarian id: ")
+        librarian_Index = Librarian.Search_Librarian(librarian_id)
+        if librarian_Index != -1:
+            Book.Active_Books()
+            book_id = input("\nEnter book id you want to borrow: ")
+            book_Index = Book.Search_Book(book_id)
+            if book_Index != -1:
+                if Book.book_List[book_Index].status == "Active":
+                    client_id = input("\nEnter client id: ")
+                    if Client.Search_Client(client_id) != -1:
+                        id = str(BorrowingOrder.counter + 1)
+                        Borrowing_Order.counter = Borrowing_Order.counter + 1
+                        orderDate = date.today()
+                        status = "Active"
+                        newOrder = Borrowing_Order(id, orderDate, client_id, book_id, librarian_id, status)
+                        Borrowing_Order.ordersList.append(newOrder)
+                        print("Borrowed successfully\n")
+
+                     Book.book_List[book_Index].status = "Inactive"
+
+
+                    else:
+                        print("There is no client with this id.")
+                else:
+                    print("This book is inactive.")
+            else:
+                print("There is no book with this id.")
+        else:
+            print("There is no librarian with this id.")
+
+ def Return_Book():
+
+        Borrowing_Order.ActiveOrders()
+        borrowing_id = input("\nEnter borrowing id you want to return:\n"
+                             "Borrowing id: ")
+        index = Borrowing_Order.Search_Order(borrowing_id)
+        if index != -1:
+            Borrowing_Order.orders_List[index].status = "Expired"
+            book_index = Book.Search_Book(Borrowing_Order.orders_List[index].book_id)
+            Book.book_List[book_index].status = "Active"
+            print("\nBook returned successfully\n")
+        else:
+            print("\nThere is no borrowing order with this id\n")
+
+ def Cancel_Order():
+
+        Borrowing_Order.ActiveOrders()
+        borrowing_id = input("\nEnter borrowing id you want to cancel:\n"
+                             "Borrowing id: ")
+        index = Borrowing_Order.Search_Order(borrowing_id)
+        if index != -1:
+            Borrowing_Order.orders_List[index].status = "Canceled"
+            book_index = Book.Search_Book(Borrowing_Order.orders_List[index].book_id)
+            Book.book_List[book_index].status = "Active"
+            print(" canceled successfully ")
+        else:
+            print("\nThere is no borrowing order with this id\n")
+
+ def List_Orders():
+
+        if len(Borrowing_Order.orders_List) > 0:
+            print("\nBorrowing id\t  Order date\t Client id\t Book id\t Librarian id\t Status")
+            for order in Borrowing_Order.ordersList:
+                print(
+                    order.id\n, order.date\n, order.client_id \n, order.book_id\n, order.librarian_id \n, order.status)
+                else:
+                print("No Orders")
+
+ def Total_Orders():
+
+            active, expired, canceled = 0, 0, 0
+            for order in Borrowing_Order.orders_List:
+                if order.status == "Active":
+                    active = active + 1
+                elif order.status == "Expired":
+                    expired = expired + 1
+                else:
+                    canceled = canceled + 1
+
+            print("Total active orders = ", active,"\n
+            "Total expired orders = ", expired,"\n
+            "Total canceled orders = ", canceled")
+
+ def Client_Orders():
+
+                id = input("\nEnter client id: ")
+                index = Client.Search_Client(id)
+                if index != -1:
+                    print(Borrowing id\n  Order date\n Client id\n Book id\n Librarian id\n Status)
+                    for order in Borrowing_Order.orders_List:
+                        if order.client_id == id:
+                            print( order.id, "\n", order.date, "\n", order.client_id, "\n", order.book_id,
+                                  \n order.librarian_id\n order.status)
+                                  
+######################################################################################################
+
+ #def login(self, username: str, password: str) -> bool:
+        for item in self.librarian_list:
+            if username == item.get_username() and password == item.get_password():
+                return True
+                
+    
+        return False
+
 
